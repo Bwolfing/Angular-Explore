@@ -1,11 +1,21 @@
 import { TestBed, async } from '@angular/core/testing';
+import { FormsModule } from "@angular/forms";
 import { AppComponent } from './app.component';
+import { EstimateCalculatorComponent } from "./estimate-calculator/estimate-calculator.component";
+import { IRideService } from "./services/ride-service.service"
+
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent, EstimateCalculatorComponent
       ],
+      imports: [
+        FormsModule
+      ],
+      providers: [
+        IRideService.MockRideServiceProvider()
+      ]
     }).compileComponents();
   }));
   it('should create the app', async(() => {
