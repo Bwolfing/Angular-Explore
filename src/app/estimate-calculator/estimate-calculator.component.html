@@ -1,0 +1,28 @@
+<div>
+  <div class="form-group">
+    <label class="form-label-control">
+      Start
+    </label>
+    <input class="form-control" type="number" [(ngModel)]="start.Latitude" />
+    <input class="form-control" type="number" [(ngModel)]="start.Longitude" />
+  </div>
+  <div class="form-group">
+    <label class="form-label-control">
+      End
+    </label>
+    <input class="form-control" type="number" [(ngModel)]="end.Latitude" />
+    <input class="form-control" type="number" [(ngModel)]="end.Longitude" />
+  </div>
+  <button type="button" class="btn btn-primary" (click)="getEstimate()">
+    Calculate
+  </button>
+  <div *ngIf="currentEstimate">
+    Ride estimate: {{ currentEstimate.TotalCost | currency }}
+    <br />
+    Prime Time: {{ currentEstimate.PrimeTimeRate | percent }}
+    <br />
+    Ride cost: {{ currentEstimate.RideCost | currency }}
+    <br />
+    Surcharge: {{ currentEstimate.Surcharge | currency}}
+  </div>
+</div>
