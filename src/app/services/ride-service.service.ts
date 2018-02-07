@@ -5,13 +5,6 @@ import 'rxjs/add/operator/map'
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 export abstract class IRideService {
-    static MockRideServiceProvider(service?: IRideService): Provider {
-        return {
-            provide: IRideService,
-            useFactory: () => service || new MockRideService
-        };
-    };
-
     abstract getEstimate(start: RideLocation, end: RideLocation): Observable<Estimate>
 }
 
@@ -21,18 +14,6 @@ export const RideServiceProvider: Provider = {
     deps: [
         HttpClient
     ]
-}
-
-@Injectable()
-class MockRideService implements IRideService {
-    getEstimate(start: RideLocation, end: RideLocation): Observable<Estimate> {
-        return of({
-            TotalCost: 10.55,
-            PrimeTimeRate: 0.15,
-            RideCost: 9.55,
-            Surcharge: 1
-        });
-    }
 }
 
 @Injectable()
