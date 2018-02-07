@@ -5,13 +5,6 @@ import 'rxjs/add/operator/map'
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 export abstract class IRideService {
-    static readonly RideServiceProvider: Provider = {
-        provide: IRideService,
-        useFactory: (httpClient: HttpClient) => new RideService(httpClient),
-        deps: [
-            HttpClientModule
-        ]
-    };
     static MockRideServiceProvider(service?: IRideService): Provider {
         return {
             provide: IRideService,
@@ -22,10 +15,17 @@ export abstract class IRideService {
     abstract getEstimate(start: RideLocation, end: RideLocation): Observable<Estimate>
 }
 
+export const RideServiceProvider: Provider = {
+    provide: IRideService,
+    useFactory: (httpClient: HttpClient) => new RideService(httpClient),
+    deps: [
+        HttpClient
+    ]
+}
+
 @Injectable()
 class MockRideService implements IRideService {
-    getEstimate(start: RideLocation, end: RideLocation): Observable<Estimate>
-    {
+    getEstimate(start: RideLocation, end: RideLocation): Observable<Estimate> {
         return of({
             TotalCost: 10.55,
             PrimeTimeRate: 0.15,
@@ -40,9 +40,7 @@ class RideService implements IRideService {
     constructor(private http: HttpClient) {
     }
 
-    getEstimate(start: RideLocation, end: RideLocation): Observable<Estimate>
-    {
-        debugger;
-        return this.http.get<Estimate>("api/resitmate");
+    getEstimate(start: RideLocation, end: RideLocation): Observable<Estimate> {
+        return this.http.get<Estimate>("api/estimate");
     }
 }

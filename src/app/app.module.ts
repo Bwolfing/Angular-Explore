@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from "@angular/forms";
+import { HttpClientModule } from '@angular/common/http';
 
-import { IRideService } from "./services/ride-service.service";
+import { RideServiceProvider } from "./services/ride-service.service";
 
 import { AppComponent } from './app.component';
 import { EstimateCalculatorComponent } from './estimate-calculator/estimate-calculator.component';
@@ -15,10 +16,11 @@ import { EstimateCalculatorComponent } from './estimate-calculator/estimate-calc
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [
-    IRideService.RideServiceProvider
+    RideServiceProvider
   ],
   bootstrap: [AppComponent]
 })
