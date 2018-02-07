@@ -27,6 +27,7 @@ export class EstimateCalculatorComponent implements OnInit {
     }
 
     getEstimate() {
+        debugger;
         let observable = this.rideService.getEstimate(this.start, this.end);
         observable.subscribe(estimate => this.currentEstimate = estimate);
 
